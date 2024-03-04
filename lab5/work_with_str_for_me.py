@@ -110,3 +110,107 @@ s = "ConvertCamelCaseStringToSnakeCase"
 result = camel_to_snake(s)
 print(result)
 '''
+#1
+import re
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+x = re.search(r'a+b*', content)
+print(x)
+#2
+import re
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+match = re.search(r'ab{2,3}', content)
+print(match)
+#3
+import re
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+match = re.findall(r'[a-z]+_[a-z]+', content)
+print(match)
+#4
+import re
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+match = re.findall(r'[A-Z][a-z]+', content)
+print(match)
+#5
+import re
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+match = re.search(r'a.*b', content)
+print(match)
+#6
+import re
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+match = re.sub('[ ,.]', ':', content)
+print(match)
+#7
+import re
+
+def snake_to_camel(match):
+    snake_case = match.group(0)
+    camel_case = snake_case[0] + snake_case[1:3].replace('_', '').capitalize()
+    return camel_case
+
+
+with open('row.txt', 'r') as file:
+    content = file.read()
+
+camel_case = re.sub(r'[a-zA-Z]_[a-zA-Z]', snake_to_camel, content)
+print(camel_case)
+#8
+import re
+
+content = "ahskjfhasjfFfsafhsaLfhSgsagsaGh"
+
+# with open('row.txt', 'r') as file:
+#     content = file.read()
+
+match = re.split(r'[A-Z]', content)
+
+print(match)
+
+#9
+import re
+
+def spacing(match):
+    group = match.group(0)
+    return group[0] + " " + group[1]
+
+content = "HelloMyNameIsRailan"
+
+# with open('row.txt', 'r') as file:
+#     content = file.read()
+
+title_with_spaces = re.sub(r'.[A-Z]', spacing, content)
+print(title_with_spaces)
+#10
+import re
+
+def camel_to_snake(match):
+    group = match.group(0)
+    snake_case = group[0] + '_' + group[1].lower()
+    return snake_case
+
+content = "camelCase"
+
+# with open('row.txt', 'r') as file:
+#     content = file.read()
+
+snake_cased = re.sub(r'[a-z][A-Z]', camel_to_snake, content)
+
+print(snake_cased)
