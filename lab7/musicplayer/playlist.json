@@ -1,0 +1,31 @@
+{
+    "playlist": [
+        {
+            "name": "MATRANG - Заманчивая",
+            "path": "../assets/sounds/MATRANG - Заманчивая.mp3",
+            "format": "mp3",
+            "duration": {
+                "minutes": "3",
+                "seconds": "35"
+            }
+        },
+        {
+            "name": "Дима Билан - Молния",
+            "path": "../assets/sounds/Дима Билан - Молния.mp3",
+            "format": "mp3",
+            "duration": {
+                "minutes": "3",
+                "seconds": "1"
+            }
+        },
+        {
+            "name": "Юрий Шатунов - Седая ночь",
+            "path": "../assets/sounds/Юрий Шатунов - Седая ночь.mp3",
+            "format": "mp3",
+            "duration": {
+                "minutes": "6",
+                "seconds": "21"
+            }
+        }
+    ]
+}
