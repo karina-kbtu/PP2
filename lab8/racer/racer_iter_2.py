@@ -1,7 +1,7 @@
 import pygame, sys, os
 from pygame.locals import *
 import random, time
- 
+
 pygame.init()
 
 # Regulating image path both on Unix and MS-DOS + preventing oveloading with pygame.image.load
@@ -9,21 +9,20 @@ _image_library = {}
 def get_image(path):
     image = _image_library.get(path)
     if image == None:
-        canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+        canonicalized_path = path.replace('\\', '/')
         image = pygame.image.load(canonicalized_path)
         _image_library[path] = image
     return image
-
 done = False
 FPS = 60
 Clock = pygame.time.Clock()
 
 # Colors
-BLACK = pygame.Color(0, 0, 0)         
-WHITE = pygame.Color(255, 255, 255)   
-GREY = pygame.Color(128, 128, 128)  
+BLACK = pygame.Color(0, 0, 0)
+WHITE = pygame.Color(255, 255, 255)
+GREY = pygame.Color(128, 128, 128)
 YELLOW = pygame.Color(255, 255, 0)
-RED = pygame.Color(255, 0, 0)   
+RED = pygame.Color(255, 0, 0)
 
 # Game variables
 NORMAL_PLAYER_SPEED = 5
@@ -54,7 +53,7 @@ class Car(pygame.sprite.Sprite):
         super().__init__()
         self.image = get_image(image_path)
         self.rect = self.image.get_rect()
-    
+
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
@@ -76,8 +75,8 @@ class Player(Car):
     def __init__(self, image_path):
         super().__init__(image_path)
         # Centering Player on x, y counting its image width and height
-        self.rect.center = (SCREEN_WIDTH / 2 - self.rect.width, SCREEN_HEIGHT - self.rect.height)
-    
+        self.rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - self.rect.height)
+
     def move(self):
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_UP] or pressed_keys[K_w]:
@@ -98,7 +97,7 @@ class Item(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(get_image(image_path), (40, 40))
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(self.rect.width, SCREEN_WIDTH - self.rect.width), 0)
-    
+
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
@@ -121,7 +120,6 @@ class Fuel(Item):
         if self.rect.bottom > (SCREEN_HEIGHT + self.rect.height):
             self.rect.top = 0
             self.rect.center = (random.randint(2 * self.rect.width, SCREEN_WIDTH - (2 * self.rect.width)), 0)
-
 
 # Setting up sprites
 P1 = Player("Player.png")
@@ -155,7 +153,7 @@ FUEL_EXPIRE = pygame.USEREVENT + 4
 # Playing background music
 background_music = pygame.mixer.Sound("background.wav")
 background_music.play(-1)
- 
+
 while not done:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -179,7 +177,7 @@ while not done:
     SCREEN.blit(scores_text, (10, 10))
     coins_text = font_small.render(str(COINS), True, YELLOW)
     SCREEN.blit(coins_text, (SCREEN_WIDTH - 20, 10))
-    
+
     # Move and re-draw sprites
     for entity in all_sprites:
         entity.draw(SCREEN)
@@ -210,7 +208,7 @@ while not done:
         COINS += 1
         for entity in coins:
             entity.kill()
-    
+
     # Handling collisions with Fuels
     if pygame.sprite.spritecollideany(P1, fuels):
         if not FUEL_USED:

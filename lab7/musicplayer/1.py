@@ -12,7 +12,7 @@ _image_library = {}
 def get_image(path):
     image = _image_library.get(path)
     if image == None:
-        canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+        canonicalized_path = path.replace('\\', '/')
         image = pygame.image.load(canonicalized_path)
         _image_library[path] = image
     return image
@@ -150,4 +150,4 @@ while not done:
     screen.blit(play_stop_image, ((WIDTH / 2) - play_stop_image.get_width() // 2, (HEIGHT / 2) + 60))
 
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(60) 

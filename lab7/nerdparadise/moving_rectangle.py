@@ -5,7 +5,7 @@ _sound_library = {}
 def play_sound(path):
     sound = _sound_library.get(path)
     if sound == None:
-        canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+        canonicalized_path = path.replace('\\', '/')
         sound = pygame.mixer.Sound(canonicalized_path)
     sound.play()
 
@@ -22,7 +22,7 @@ rect_height = 60
 
 clock = pygame.time.Clock()
 
-pygame.mixer.music.load('../assets/sounds/Құрмаш Маханов - Кездесу мен қоштасу].mp3')
+pygame.mixer.music.load('../assets/sounds/Дима Билан - Молния].mp3')
 music_playing = False
 move_keys = [
     pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d,
@@ -45,7 +45,7 @@ while not done:
                 pygame.mixer.music.play(0)
         if event.type == pygame.KEYDOWN and (event.key in move_keys):
             if not key_held_down[event.key]:
-                play_sound('../assets/sounds/slimejump-6913.mp3')
+                play_sound('../assets/sounds/Юрий Шатунов - Седая ночь.mp3')
                 key_held_down[event.key] = True
         if event.type == pygame.KEYUP and (event.key in move_keys):
             key_held_down[event.key] = False
